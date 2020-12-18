@@ -1,0 +1,42 @@
+version: '3.6'
+
+services:
+  nodered:
+    image: moe:moe-smart-home
+    volumes:
+      - ./data/nodered:/data
+      - /etc/localtime:/etc/localtime
+    depends_on:
+      - mqtt
+    restart: always
+    network_mode: "host"
+    environment:
+      - TZ=Europe/Berlin
+    
+  mqtt:
+    image: "eclipse-mosquitto"
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./data/mqtt:/mosquitto
+      - /etc/localtime:/etc/localtime
+    restart: always
+    environment:
+      - TZ=Europe/Berlin
+    
+  zigbee:
+    image: koenkk/zigbee2mqtt
+    volumes:
+      - ./data/zigbee:/app/data
+      - /run/udev:/run/udev:ro
+      - /etc/localtime:/etc/localtime
+    devices:
+      - "/dev/ttyACM0:/dev/ttyACM0"
+      - "/dev/ttyACM1:/dev/ttyACM1"
+    restart: always
+    privileged: true
+    ports:
+      - 1881:1881
+    environment:
+      - TZ=Europe/Berlin
