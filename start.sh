@@ -70,7 +70,7 @@ advanced:
 
 EOF
 
-echo '⚠️  Disable permit_join in data/zigbee/configuration.yaml or the Zigbee2MQTT webinterface on port 1881, after you have paired all of your devices!'
+echo 'Disable permit_join in data/zigbee/configuration.yaml or the Zigbee2MQTT webinterface on port 1881, after you have paired all of your devices!'
 
 }
 
@@ -96,12 +96,12 @@ function build_data_structure {
 
 function check_dependencies {
 	if ! [ -x "$(command -v docker-compose)" ]; then
-		echo '⚠️  Error: docker-compose is not installed.' >&2
+		echo 'Error: docker-compose is not installed.' >&2
 		exit 1
 	fi
 
 	if ! [ -x "$(command -v git)" ]; then
-		echo '⚠️  Error: git is not installed.' >&2
+		echo 'Error: git is not installed.' >&2
 		exit 1
 	fi
 }
@@ -110,7 +110,7 @@ function start {
 
 	device=$(detect_zigbee_device)
 	if [ $device == "False" ]; then
-		echo '⚠️  No Zigbee adaptor found. Not starting Zigbee2MQTT.'
+		echo 'No Zigbee adaptor found. Not starting Zigbee2MQTT.'
 		container="nodered mqtt"
 	fi
 
@@ -125,6 +125,13 @@ function start {
 function stop {
 	echo 'Stopping all containers'
 	docker-compose stop
+}
+
+function build {
+	echo 'Building docker image'
+	cd docker-image
+	./docker-make.sh
+	cd ..
 }
 
 function update {
@@ -147,9 +154,9 @@ exit 1
 	echo 'Shutting down all running containers and removing them.'
 	docker-compose down --remove-orphans
 	if [ ! $? -eq 0 ]; then
-		echo '⚠️  Updating failed. Please check the repository on GitHub.'
+		echo 'Updating failed. Please check the repository on GitHub.'
 	fi
-	echo '⬇️  Pulling latest release via git.'
+	echo 'Pulling latest release via git.'
 	git fetch --tags
 	latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
 	git checkout $latestTag
@@ -159,7 +166,7 @@ exit 1
 	echo 'Pulling docker images.'
 	docker-compose pull
 	if [ ! $? -eq 0 ]; then
-		echo '⚠️  Updating failed. Please check the repository on GitHub.'
+		echo 'Updating failed. Please check the repository on GitHub.'
 	fi 
 	start
 }
@@ -176,6 +183,9 @@ case "$1" in
 	"update")
 		update
 		;;
+	"build")
+		build
+		;;
 	"data")
 		build_data_structure
 		;;
@@ -187,6 +197,7 @@ Usage:
 start.sh update – update to the latest release version
 start.sh start – run all containers
 start.sh stop – stop all containers
+start.sh build - build docker image
 start.sh data – set up the data folder needed for the containers, but run none of them. Useful for personalized setups.
 
 EOF

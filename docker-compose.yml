@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   nodered:
-    image: moe:moe-smart-home
+    image: mrmoe/moe-smart-home:latest
     volumes:
       - ./data/nodered:/data
       - /etc/localtime:/etc/localtime

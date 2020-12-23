@@ -1,9 +1,12 @@
 # moe-smart-home
 
-A ready-to-use Node-RED setup for home automation. It includes [Node-RED](https://nodered.org/),
+A ready-to-use Node-RED setup for home automation, heaviliy inspired by c't-Smart-Home. It includes [Node-RED](https://nodered.org/),
 MQTT (provided by [Eclipse Mosquitto](https://mosquitto.org/)), Zigbee-Support (provided by [zigbee2mqtt](https://www.zigbee2mqtt.io/)).
 
-We also added Node-RED-Nodes for [HomeKit](https://github.com/NRCHKB/node-red-contrib-homekit-bridged),  [FritzBox](https://github.com/bashgroup/node-red-contrib-fritz), [Tado](https://github.com/mattdavis90/node-red-contrib-tado-client), [Bluetooth-LE-Support](https://github.com/clausbroch/node-red-contrib-noble-bluetooth), [Zigbee2Mqtt-Support](https://flows.nodered.org/node/node-red-contrib-zigbee2mqtt) and a [Dashboard](https://github.com/node-red/node-red-dashboard).
+c't-Smart-Home added Node-RED-Nodes for [HomeKit](https://github.com/NRCHKB/node-red-contrib-homekit-bridged),  [FritzBox](https://github.com/bashgroup/node-red-contrib-fritz), [Tado](https://github.com/mattdavis90/node-red-contrib-tado-client), [Bluetooth-LE-Support](https://github.com/clausbroch/node-red-contrib-noble-bluetooth), [Zigbee2Mqtt-Support](https://flows.nodered.org/node/node-red-contrib-zigbee2mqtt) and a [Dashboard](https://github.com/node-red/node-red-dashboard).
+
+Since I need Harmony as well and Harmony Nodes cannot be installed via the palette without having `python`, `make`, `cc` installed, I started to build my own Docker image 
+based on the work for c't-Smart-Home.
 
 ## Requirements
 
@@ -52,7 +55,7 @@ After starting the containers you'll reach Node-RED [http://docker-host:1880](ht
 ## `start.sh` options
 
 ```plaintext
-🏡 setup script
+setup script
 —————————————————————————————
 Usage:
 start.sh update – to update this copy of the repo
