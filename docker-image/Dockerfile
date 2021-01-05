@@ -76,7 +76,7 @@ LABEL org.label-schema.build-date=${BUILD_DATE} \
     org.label-schema.vcs-type="Git" \
     org.label-schema.vcs-url="https://github.com/moeb98/moe-smart-home" \
     org.label-schema.arch=${ARCH} \
-    authors="Dave Conway-Jones, Nick O'Leary, James Thomas, Raymond Mouthaan, Merlin Schumacher, Jan Mahn, Andrijan Möcker, Anton Golubev, J. Völker, GnafGnaf" \
+    authors="Dave Conway-Jones, Nick O'Leary, James Thomas, Raymond Mouthaan, Merlin Schumacher, Jan Mahn, Andrijan Möcker, Anton Golubev, J. Völker, GnafGnaf, Mario Eberlein" \
     org.opencontainers.image.source=https://github.com/moeb98/moe-smart-home
 
 COPY --from=build /usr/src/node-red/prod_node_modules ./node_modules
@@ -93,6 +93,7 @@ ENV NODE_RED_VERSION=$NODE_RED_VERSION \
     FLOWS=flows.json
 
 # ENV NODE_RED_ENABLE_SAFE_MODE=true    # Uncomment to enable safe start mode (flows not running)
+# Enable GitHub version control with Node Red Projects 
 ENV NODE_RED_ENABLE_PROJECTS=true     
 
 # User configuration directory volume
