@@ -57,6 +57,7 @@
         "node-red-contrib-noble-bluetooth": "*",
         "node-red-contrib-tado-client": "*",
         "node-red-contrib-zigbee2mqtt": "*",
+	"node-red-node-suncalc": "*",
         "node-red-dashboard": "*"
     }
 }
