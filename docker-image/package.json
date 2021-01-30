@@ -1,12 +1,12 @@
 {
-    "name": "ctnodered",
-    "version": "1.5.0",
+    "name": "moe-smart-home",
+    "version": "0.2.1",
     "description": "A visual tool for wiring the Internet of Things",
-    "homepage": "https://www.ct.de/smarthome",
+    "homepage": "https://github.com/moeb98/moe-smart-home",
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/ct-Open-Source/ct-Smart-Home.git"
+        "url": "https://github.com/moeb98/moe-smart-home.git"
     },
     "main": "node_modules/node-red/red/red.js",
     "scripts": {
