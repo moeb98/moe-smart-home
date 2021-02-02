@@ -10,7 +10,7 @@ RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
 
 
 #### Stage BASE ########################################################################################################
-FROM node:${NODE_VERSION}-${OS} AS base
+FROM arm32v7/node:${NODE_VERSION}-${OS} AS base
 
 # Copy qemu
 COPY --from=qemu qemu-arm-static /usr/bin
