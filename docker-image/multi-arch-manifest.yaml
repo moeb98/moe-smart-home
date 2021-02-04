@@ -1,4 +1,5 @@
-image: mrmoe/moe-smart-home:latest
+# image: mrmoe/moe-smart-home:latest
+image: mrmoe/moe-smart-home
 manifests:
   - image: mrmoe/moe-smart-home:amd64
     platform:
