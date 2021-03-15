@@ -27,13 +27,13 @@ function create_mosquitto_config {
 log_type all
 
 listener 1883
-listener 9001 
+listener 9001
 protocol websockets
 
 # Uncomment the following lines and create a passwd file using mosquitto_passwd to enable authentication.
-#password_file /mosquitto/config/passwd
+password_file /mosquitto/config/passwd
 # Set this to false, to enable authentication
-allow_anonymous true
+allow_anonymous false
 EOF
 
 touch data/mqtt/config/passwd
@@ -41,16 +41,32 @@ touch data/mqtt/config/passwd
 }
 
 function create_zigbee2mqtt_config {
+#        configfile='mqtt.cfg'
+#        if [ -f ${configfile} ]; then
+#                echo "Reading user config...." >&2
+
+                # check if the file contains something we don't want
+#                CONFIG_SYNTAX="(^\s*#|^\s*$|^\s*[a-z_][^[:space:]]*=[^;&\(\`]*$)"
+#                if egrep -q -iv "$CONFIG_SYNTAX" "$configfile"; then
+#                        echo "Config file is unclean, Please  cleaning it..." >&2
+#                        exit 1
+#                fi
+                # now source it, either the original or the filtered variant
+#                source "$configfile"
+#        else
+#                echo "There is no configuration file call ${configfile}"
+#        fi
+
 	cat > data/zigbee/configuration.yaml <<EOF
 # Home Assistant integration (MQTT discovery)
-homeassistant: true 
+homeassistant: true
 
 # allow new devices to join
 permit_join: true
 
 # enable frontend
 frontend:
-  port: 1881 
+  port: 1881
 experimental:
   new_api: true
 
@@ -61,8 +77,8 @@ mqtt:
   # MQTT server URL
   server: 'mqtt://mqtt'
   # MQTT server authentication, uncomment if required:
-  # user: my_user
-  # password: my_password
+#  user: $MQTT_USER
+#  password: $MQTT_PASSWORD
 
 advanced:
   channel: 25
@@ -72,6 +88,14 @@ EOF
 
 echo 'Disable permit_join in data/zigbee/configuration.yaml or the Zigbee2MQTT webinterface on port 1881, after you have paired all of your devices!'
 
+}
+
+function fix_permissions {
+	echo 'Setting the permissions of the configurations in the data folder.'
+	sudo chown 1883:1883 data/mqtt
+	sudo chown -Rf 1883:1883 data/mqtt/*
+	sudo chown 1000:1000 data/nodered
+	sudo chown -Rf 1000:1000 data/nodered/*
 }
 
 function build_data_structure {
@@ -88,10 +112,7 @@ function build_data_structure {
 		create_zigbee2mqtt_config
 	fi
 
-	sudo chown 1883:1883 data/mqtt
-	sudo chown -R 1883:1883 data/mqtt/*
-	sudo chown 1000:1000 data/nodered
-	sudo chown -Rf 1000:1000 data/nodered/*
+        fix_permissions
 }
 
 function check_dependencies {
@@ -140,7 +161,7 @@ function update {
 	then
 		echo "Manually downloaded version.
 Automatic update only works with a cloned Git repository.
-Back up your settings and shut down all containers with 
+Back up your settings and shut down all containers with
 
 docker-compose down --remove orphans
 
@@ -167,8 +188,9 @@ exit 1
 	docker-compose pull
 	if [ ! $? -eq 0 ]; then
 		echo 'Updating failed. Please check the repository on GitHub.'
-	fi 
+	fi
 	start
+        fix_permissions
 }
 
 check_dependencies
