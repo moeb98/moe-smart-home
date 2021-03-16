@@ -41,21 +41,21 @@ touch data/mqtt/config/passwd
 }
 
 function create_zigbee2mqtt_config {
-#        configfile='mqtt.cfg'
-#        if [ -f ${configfile} ]; then
-#                echo "Reading user config...." >&2
+        configfile='mqtt.cfg'
+        if [ -f ${configfile} ]; then
+                echo "Reading user config...." >&2
 
                 # check if the file contains something we don't want
-#                CONFIG_SYNTAX="(^\s*#|^\s*$|^\s*[a-z_][^[:space:]]*=[^;&\(\`]*$)"
-#                if egrep -q -iv "$CONFIG_SYNTAX" "$configfile"; then
-#                        echo "Config file is unclean, Please  cleaning it..." >&2
-#                        exit 1
-#                fi
+                CONFIG_SYNTAX="(^\s*#|^\s*$|^\s*[a-z_][^[:space:]]*=[^;&\(\`]*$)"
+                if egrep -q -iv "$CONFIG_SYNTAX" "$configfile"; then
+                        echo "Config file is unclean, Please  cleaning it..." >&2
+                        exit 1
+                fi
                 # now source it, either the original or the filtered variant
-#                source "$configfile"
-#        else
-#                echo "There is no configuration file call ${configfile}"
-#        fi
+                source "$configfile"
+        else
+                echo "There is no configuration file call ${configfile}"
+        fi
 
 	cat > data/zigbee/configuration.yaml <<EOF
 # Home Assistant integration (MQTT discovery)
@@ -77,8 +77,8 @@ mqtt:
   # MQTT server URL
   server: 'mqtt://mqtt'
   # MQTT server authentication, uncomment if required:
-#  user: $MQTT_USER
-#  password: $MQTT_PASSWORD
+  user: $MQTT_USER
+  password: $MQTT_PASSWORD
 
 advanced:
   channel: 25
