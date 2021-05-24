@@ -1,0 +1,9 @@
+version: '3.6'
+
+services:
+  nodered:
+    volumes:
+      - ./data/nodered:/data
+      - /dev/vchiq:/dev/vchiq
+      - /etc/localtime:/etc/localtime
+    
