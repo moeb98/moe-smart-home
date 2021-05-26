@@ -4,6 +4,8 @@ ARG OS=alpine
 #### Stage BASE ########################################################################################################
 FROM node:${NODE_VERSION}-${OS} AS base
 
+ARG VCHIQ_GID=44
+
 # Copy scripts
 COPY scripts/*.sh /tmp/
 
@@ -32,6 +34,8 @@ RUN set -ex && \
     mkdir -p /usr/src/node-red /data && \
     deluser --remove-home node && \
     adduser -h /usr/src/node-red -D -H node-red -u 1000 && \
+    addgroup -g ${VCHIQ_GID} -S vchiq && \
+    addgroup node-red vchiq && \
     chown -R node-red:root /data && chmod -R g+rwX /data && \ 
     chown -R node-red:root /usr/src/node-red && chmod -R g+rwX /usr/src/node-red 
 

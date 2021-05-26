@@ -12,6 +12,8 @@ RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
 #### Stage BASE ########################################################################################################
 FROM arm32v7/node:${NODE_VERSION}-${OS} AS base
 
+ARG VCHIQ_GID=44
+
 # Copy qemu
 COPY --from=qemu qemu-arm-static /usr/bin
 
@@ -43,6 +45,8 @@ RUN set -ex && \
     mkdir -p /usr/src/node-red /data && \
     deluser --remove-home node && \
     adduser -h /usr/src/node-red -D -H node-red -u 1000 && \
+    addgroup -g ${VCHIQ_GID} -S vchiq && \
+    addgroup node-red vchiq && \
     chown -R node-red:root /data && chmod -R g+rwX /data && \ 
     chown -R node-red:root /usr/src/node-red && chmod -R g+rwX /usr/src/node-red 
 

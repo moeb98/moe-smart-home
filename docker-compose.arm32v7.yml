@@ -1,9 +1,12 @@
-version: '3.6'
+version: '3.8'
 
 services:
   nodered:
     volumes:
       - ./data/nodered:/data
-      - /dev/vchiq:/dev/vchiq
       - /etc/localtime:/etc/localtime
-    
+    devices:
+      - /dev/vchiq:/dev/vchiq
+    environment:
+      - TZ=Europe/Berlin
+      - LD_LIBRARY_PATH=/opt/vc/lib    
