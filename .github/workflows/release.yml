@@ -48,9 +48,9 @@ jobs:
         run: echo ${{ steps.buildx.outputs.platforms }}
       - name: Run Buildx
         run: |
-#          if [ ${{ matrix.node_version }} -eq "12" ]; then
-#              export LATEST="-t ctmagazin/ctnodered:latest -t ghcr.io/ct-open-source/ctnodered:latest"
-#          fi
+          #         if [ ${{ matrix.node_version }} -eq "12" ]; then
+          #              export LATEST="-t ctmagazin/ctnodered:latest -t ghcr.io/ct-open-source/ctnodered:latest"
+          #         fi
           docker buildx build \
             --platform linux/arm/v7,linux/arm64,linux/arm/v6 \
             -o type=registry \
@@ -64,7 +64,7 @@ jobs:
             --build-arg OS=alpine \
             --build-arg BUILD_DATE="$(date +"%Y-%m-%dT%H:%M:%SZ")" \
             --build-arg TAG_SUFFIX=latest \
-            --file ./docker-image/Dockerfile.arm32v7 ./docker-image
+            --file ./docker-image/Dockerfile.dev ./docker-image
             
           docker buildx build \
             --platform linux/amd64 \
