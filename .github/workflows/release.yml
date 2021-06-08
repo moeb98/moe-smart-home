@@ -33,7 +33,7 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
-          username: ${{github.actor}}
+          username: ${{github.repository_owner}}
           password: ${{secrets.GITHUB_TOKEN}}
           registry: ghcr.io
       - name: Cache Docker layers
@@ -55,7 +55,6 @@ jobs:
             -t mrmoe/moe-smart-home:latest \
             -t ghcr.io/moeb98/moe-smart-home:$(git describe --tags `git rev-list --tags --max-count=1`) \
             -t ghcr.io/moeb98/moe-smart-home:latest \
-            $LATEST \
             --build-arg NODE_VERSION=14 \
             --build-arg NODE_RED_VERSION=latest \
             --build-arg OS=alpine \
@@ -66,10 +65,10 @@ jobs:
           docker buildx build \
             --platform linux/amd64 \
             -o type=registry \
-            -t mrmoe/moe-smart-home:$(git describe --tags `git rev-list --tags --max-count=1`) \
-            -t mrmoe/moe-smart-home:latest \
-            -t ghcr.io/moeb98/moe-smart-home:$(git describe --tags `git rev-list --tags --max-count=1`) \
-            -t ghcr.io/moeb98/moe-smart-home:latest \
+            -t mrmoe/moe-smart-home:$(git describe --tags `git rev-list --tags --max-count=1`)-amd64 \
+            -t mrmoe/moe-smart-home:latest-amd64 \
+            -t ghcr.io/moeb98/moe-smart-home:$(git describe --tags `git rev-list --tags --max-count=1`)-amd64 \
+            -t ghcr.io/moeb98/moe-smart-home:latest-amd64 \
             $LATEST \
             --build-arg NODE_VERSION=14 \
             --build-arg NODE_RED_VERSION=latest \
