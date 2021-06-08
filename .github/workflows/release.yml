@@ -5,7 +5,10 @@ on:
   release:
     types: [published]
   schedule:
-    - cron: "0 10 * * 1" # Update the image every Monday morning to provide regular updates
+    - cron: "0 10 1 * *" # Update the image every first day of a month at 10am to provide regular updates
+  push:
+    branches:
+      - master
 
 jobs:
   build:
