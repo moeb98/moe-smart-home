@@ -33,8 +33,8 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.PACKAGES_USER }}
-          password: ${{ secrets.PACKAGES_TOKEN }}
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
           registry: ghcr.io
       - name: Cache Docker layers
         uses: actions/cache@v2
