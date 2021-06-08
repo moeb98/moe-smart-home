@@ -48,9 +48,6 @@ jobs:
         run: echo ${{ steps.buildx.outputs.platforms }}
       - name: Run Buildx
         run: |
-          #         if [ ${{ matrix.node_version }} -eq "12" ]; then
-          #              export LATEST="-t ctmagazin/ctnodered:latest -t ghcr.io/ct-open-source/ctnodered:latest"
-          #         fi
           docker buildx build \
             --platform linux/arm/v7,linux/arm64,linux/arm/v6 \
             -o type=registry \
