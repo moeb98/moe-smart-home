@@ -49,6 +49,19 @@ jobs:
       - name: Run Buildx
         run: |
           docker buildx build \
+            --platform linux/amd64 \
+            -o type=registry \
+            -t mrmoe/moe-smart-home:$(git describe --tags `git rev-list --tags --max-count=1`)-amd64 \
+            -t mrmoe/moe-smart-home:latest-amd64 \
+            -t ghcr.io/moeb98/moe-smart-home:$(git describe --tags `git rev-list --tags --max-count=1`)-amd64 \
+            -t ghcr.io/moeb98/moe-smart-home:latest-amd64 \
+            --build-arg NODE_RED_VERSION=latest \
+            --build-arg OS=alpine \
+            --build-arg BUILD_DATE="$(date +"%Y-%m-%dT%H:%M:%SZ")" \
+            --build-arg TAG_SUFFIX=latest-amd64 \
+            --file ./docker-image/Dockerfile ./docker-image
+
+          docker buildx build \
             --platform linux/arm/v7,linux/arm64,linux/arm/v6 \
             -o type=registry \
             -t mrmoe/moe-smart-home:$(git describe --tags `git rev-list --tags --max-count=1`) \
@@ -60,19 +73,5 @@ jobs:
             --build-arg OS=alpine \
             --build-arg BUILD_DATE="$(date +"%Y-%m-%dT%H:%M:%SZ")" \
             --build-arg TAG_SUFFIX=latest \
-            --file ./docker-image/Dockerfile.dev ./docker-image
+            --file ./docker-image/Dockerfile.arm ./docker-image
             
-          docker buildx build \
-            --platform linux/amd64 \
-            -o type=registry \
-            -t mrmoe/moe-smart-home:$(git describe --tags `git rev-list --tags --max-count=1`)-amd64 \
-            -t mrmoe/moe-smart-home:latest-amd64 \
-            -t ghcr.io/moeb98/moe-smart-home:$(git describe --tags `git rev-list --tags --max-count=1`)-amd64 \
-            -t ghcr.io/moeb98/moe-smart-home:latest-amd64 \
-            $LATEST \
-            --build-arg NODE_VERSION=14 \
-            --build-arg NODE_RED_VERSION=latest \
-            --build-arg OS=alpine \
-            --build-arg BUILD_DATE="$(date +"%Y-%m-%dT%H:%M:%SZ")" \
-            --build-arg TAG_SUFFIX=latest \
-            --file ./docker-image/Dockerfile ./docker-image

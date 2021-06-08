@@ -1,21 +1,10 @@
 ARG NODE_VERSION=14
 ARG OS=alpine
 
-#### Stage MULTI-ARG ##########################################################
-FROM alpine AS qemu
-
-#QEMU Download
-ENV QEMU_URL https://github.com/balena-io/qemu/releases/download/v5.2.0%2Bbalena/qemu-5.2.0.balena-arm.tar.gz
-RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
-
-
 #### Stage BASE ########################################################################################################
-FROM arm32v7/node:${NODE_VERSION}-${OS} AS base
+FROM node:${NODE_VERSION}-${OS} AS base
 
 ARG VCHIQ_GID=44
-
-# Copy qemu
-COPY --from=qemu qemu-arm-static /usr/bin
 
 # Copy scripts
 COPY scripts/*.sh /tmp/
