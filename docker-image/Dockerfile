@@ -23,6 +23,7 @@ RUN set -ex && \
     avahi-compat-libdns_sd \
     dbus \
     ffmpeg \
+    libcap \
     bluez &&\
     dbus-uuidgen --ensure && \
     mkdir -p /usr/src/node-red /data && \
