@@ -23,7 +23,6 @@ RUN set -ex && \
     avahi-compat-libdns_sd \
     dbus \
     ffmpeg \
-    libcap \
     bluez &&\
     dbus-uuidgen --ensure && \
     mkdir -p /usr/src/node-red /data && \
@@ -42,7 +41,7 @@ COPY package.json .
 FROM base AS build
 
 # Install Build tools
-RUN apk add --no-cache --virtual buildtools build-base linux-headers udev eudev-dev avahi-dev && \
+RUN apk add --no-cache --virtual buildtools build-base linux-headers udev eudev-dev avahi-dev libcap && \
     npx npm-check-updates -u && \
     npm install --unsafe-perm --no-update-notifier --only=production --no-optional && \
     /tmp/remove_native_gpio.sh && \
