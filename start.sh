@@ -1,18 +1,25 @@
 #!/bin/bash
 
 function detect_zigbee_device {
-	if usb_dev=$(lsusb -d 0451:); then
-		usb_dev_count=$(ls -1 /dev/ttyACM* 2>/dev/null | wc -l)
+#	if usb_dev=$(lsusb -d 0451:); then
+	if usb_dev=$(lsusb -d 10c4:); then
+#		usb_dev_count=$(ls -1 /dev/ttyACM* 2>/dev/null | wc -l)
+		usb_dev_count=$(ls -1 /dev/ttyUSB* 2>/dev/null | wc -l)
 		if [ "$usb_dev_count" -gt 1 ]; then
-			>&2 echo "There are multiple devices connected, that could be Zigbee USB adaptors. Please check data/zigbee/configuration.yml, if the device is wrong. /dev/ttyACM0 is used as the default."
+#			>&2 echo "There are multiple devices connected, that could be Zigbee USB adaptors. Please check data/zigbee/configuration.yml, if the device is wrong. /dev/ttyACM0 is used as the default."
+			>&2 echo "There are multiple devices connected, that could be Zigbee USB adaptors. Please check data/zigbee/configuration.yml, if the device is wrong. /dev/ttyUSB0 is used as the default."
 
-			echo "/dev/ttyACM0"
+#			echo "/dev/ttyACM0"
+			echo "/dev/ttyUSB0"
 		fi
 
-		if [ -c /dev/ttyACM0 ]; then
-			echo "/dev/ttyACM0"
+#		if [ -c /dev/ttyACM0 ]; then
+		if [ -c /dev/ttyUSB0 ]; then
+#			echo "/dev/ttyACM0"
+			echo "/dev/ttyUSB0"
 		else
-			>&2 echo "I could not find /dev/ttyACM0. Please check your hardware."
+#			>&2 echo "I could not find /dev/ttyACM0. Please check your hardware."
+			>&2 echo "I could not find /dev/ttyUSB0. Please check your hardware."
 		fi
 	else
 		>&2 echo No Texas Instruments USB device found.
@@ -63,6 +70,10 @@ homeassistant: true
 
 # allow new devices to join
 permit_join: true
+
+# serial config
+serial:
+  port: /dev/ttyUSB0
 
 # enable frontend
 frontend:
