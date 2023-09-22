@@ -1,6 +1,39 @@
 version: '3.3'
 
 services:
+
+  appdaemon:
+    container_name: appdaemon
+    restart: unless-stopped
+    image: acockburn/appdaemon:latest
+    environment:
+      HA_URL: http://${SERVER_IP}:8123
+      TOKEN: ${HA_TOKEN}
+      DASH_URL: http://${SERVER_IP}:5050
+    ports:
+      - "5050:5050"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/homeassistant/config/appdaemon:/conf
+#      - /var/run/dbus:/var/run/dbus #This is only needed if wanting to use Bluetooth, can delete otherwise
+    depends_on:
+      - homeassistant
+
+
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
+    volumes:
+      - ./data/homeassistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - mqtt
+#    privileged: true
+    network_mode: host
+  
   nodered:
     image: ghcr.io/moeb98/moe-smart-home
     volumes:
