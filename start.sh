@@ -150,8 +150,10 @@ function start {
 		build_data_structure
 	fi
 
-	echo 'Starting the containers'	
+	echo 'Starting the containers'
 	if [[ $(uname -m) =~ "arm" ]]; then
+   		docker-compose -f docker-compose.yml -f docker-compose.arm32v7.yml up -d $container
+	elif [[ $(uname -m) =~ "aarch" ]]; then
    		docker-compose -f docker-compose.yml -f docker-compose.arm32v7.yml up -d $container
 	else
 		docker-compose up -d $container
