@@ -53,6 +53,7 @@
         "node-red": "*",
         "node-red-contrib-fritz": "*",
         "node-red-contrib-homekit-bridged": "*",
+        "node-red-contrib-noble-bluetooth": "*",
         "node-red-contrib-harmony-websocket": "*",
         "node-red-contrib-tado-client": "*",
         "node-red-contrib-zigbee2mqtt": "*",
