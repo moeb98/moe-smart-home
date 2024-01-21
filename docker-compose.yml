@@ -4,7 +4,7 @@ services:
 
   appdaemon:
     container_name: appdaemon
-    restart: unless-stopped
+    restart: always
     image: acockburn/appdaemon:latest
     environment:
       HA_URL: http://${SERVER_IP}:8123
@@ -23,7 +23,7 @@ services:
   homeassistant:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
-    restart: unless-stopped
+    restart: always
     environment:
       - TZ=Europe/Berlin
     volumes:
@@ -31,6 +31,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     depends_on:
       - mqtt
+      - nodered
 #    privileged: true
     network_mode: host
   
