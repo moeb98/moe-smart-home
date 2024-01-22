@@ -1,6 +1,6 @@
 {
     "name": "moe-smart-home",
-    "version": "0.4.4",
+    "version": "0.4.5",
     "description": "A visual tool for wiring the Internet of Things",
     "homepage": "https://github.com/moeb98/moe-smart-home",
     "license": "Apache-2.0",
@@ -54,6 +54,7 @@
         "node-red-contrib-fritz": "*",
         "node-red-contrib-homekit-bridged": "*",
         "node-red-contrib-noble-bluetooth": "*",
+        "@abandonware/bluetooth-hci-socket": "*",
         "node-red-contrib-harmony-websocket": "*",
         "node-red-contrib-tado-client": "*",
         "node-red-contrib-zigbee2mqtt": "*",
