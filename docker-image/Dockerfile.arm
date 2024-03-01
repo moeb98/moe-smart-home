@@ -1,4 +1,4 @@
-ARG NODE_VERSION=20
+ARG NODE_VERSION=18
 ARG OS=alpine
 
 #### Stage BASE ########################################################################################################
@@ -15,7 +15,7 @@ RUN set -ex && \
 #    python3 \
 #    make \
 #    build-base \
-    raspberrypi \
+    raspberrypi-utils \
     bash \
     tzdata \
     iputils \

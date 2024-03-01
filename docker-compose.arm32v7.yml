@@ -6,7 +6,7 @@ services:
       - ./data/nodered:/data
       - /etc/localtime:/etc/localtime
     devices:
-      - /dev/vchiq:/dev/vchiq
+      - /dev/vcio:/dev/vcio
     environment:
       - TZ=Europe/Berlin
       - LD_LIBRARY_PATH=/opt/vc/lib    
