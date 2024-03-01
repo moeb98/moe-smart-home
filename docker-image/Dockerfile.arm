@@ -1,4 +1,4 @@
-ARG NODE_VERSION=18
+ARG NODE_VERSION=20
 ARG OS=alpine
 
 #### Stage BASE ########################################################################################################
@@ -27,11 +27,11 @@ RUN set -ex && \
     su-exec \
     avahi \
     avahi-compat-libdns_sd \
-    dbus \
+#    dbus \
     ffmpeg \
     libcap-utils \
     bluez && \
-    dbus-uuidgen --ensure && \
+#    dbus-uuidgen --ensure && \
 #    dbus-daemon --system && \
     mkdir -p /usr/src/node-red /data && \
     deluser --remove-home node && \
