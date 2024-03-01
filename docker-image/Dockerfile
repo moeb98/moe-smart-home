@@ -24,8 +24,9 @@ RUN set -ex && \
     dbus \
     ffmpeg \
     libcap-utils \
-    bluez &&\
+    bluez && \
     dbus-uuidgen --ensure && \
+    dbus-daemon --system && \
     mkdir -p /usr/src/node-red /data && \
     deluser --remove-home node && \
     adduser -h /usr/src/node-red -D -H node-red -u 1000 && \

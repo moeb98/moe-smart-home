@@ -15,7 +15,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./data/homeassistant/config/appdaemon:/conf
-#      - /var/run/dbus:/var/run/dbus #This is only needed if wanting to use Bluetooth, can delete otherwise
+      - /var/run/dbus:/var/run/dbus #This is only needed if wanting to use Bluetooth, can delete otherwise
     depends_on:
       - homeassistant
 
