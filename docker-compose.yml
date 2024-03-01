@@ -34,10 +34,9 @@ services:
       - nodered
 #    privileged: true
     network_mode: host
-  
+
   nodered:
-#    image: ghcr.io/moeb98/moe-smart-home
-    image: mrmoe/moe-smart-home:dev
+    image: ghcr.io/moeb98/moe-smart-home
     volumes:
       - ./data/nodered:/data
       - /etc/localtime:/etc/localtime
