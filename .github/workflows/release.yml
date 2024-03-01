@@ -71,7 +71,7 @@ jobs:
             -t mrmoe/moe-smart-home:latest \
             -t ghcr.io/moeb98/moe-smart-home:$(git describe --tags `git rev-list --tags --max-count=1`) \
             -t ghcr.io/moeb98/moe-smart-home:latest \
-            --build-arg NODE_VERSION=14 \
+#            --build-arg NODE_VERSION=14 \
             --build-arg NODE_RED_VERSION=latest \
             --build-arg OS=alpine \
             --build-arg BUILD_DATE="$(date +"%Y-%m-%dT%H:%M:%SZ")" \
