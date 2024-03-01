@@ -36,7 +36,7 @@ services:
     network_mode: host
 
   nodered:
-    image: ghcr.io/moeb98/moe-smart-home
+    image: ghcr.io/moeb98/moe-smart-home:latest
     volumes:
       - ./data/nodered:/data
       - /etc/localtime:/etc/localtime
