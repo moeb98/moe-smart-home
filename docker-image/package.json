@@ -1,6 +1,6 @@
 {
     "name": "moe-smart-home",
-    "version": "0.4.7",
+    "version": "0.5.0",
     "description": "A visual tool for wiring the Internet of Things",
     "homepage": "https://github.com/moeb98/moe-smart-home",
     "license": "Apache-2.0",
