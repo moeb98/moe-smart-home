@@ -22,7 +22,10 @@ services:
 
   homeassistant:
     container_name: homeassistant
+<<<<<<< HEAD
 #    image: "ghcr.io/home-assistant/home-assistant:stable"
+=======
+>>>>>>> master
     image: "ghcr.io/home-assistant/home-assistant:2024.3"
     restart: always
     environment:
@@ -70,7 +73,7 @@ services:
     devices:
       - "/dev/ttyACM0:/dev/ttyACM0"
       - "/dev/ttyACM1:/dev/ttyACM1"
-      - "/dev/ttyUSB0:/dev/ttyUSB0"
+#      - "/dev/ttyUSB0:/dev/ttyUSB0"
     restart: always
     privileged: true
     ports:
