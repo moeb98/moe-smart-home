@@ -1,14 +1,6 @@
 {
     "name": "moe-smart-home",
-<<<<<<< HEAD
-    "version": "0.5.3",
-=======
-<<<<<<< HEAD
     "version": "0.5.4",
-=======
-    "version": "0.5.3",
->>>>>>> master
->>>>>>> fix-cleanup
     "description": "A visual tool for wiring the Internet of Things",
     "homepage": "https://github.com/moeb98/moe-smart-home",
     "license": "Apache-2.0",
