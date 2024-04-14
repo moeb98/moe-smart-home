@@ -156,10 +156,8 @@ function start {
 
 	echo 'Starting the containers'
 	if [[ $(uname -m) =~ "arm" ]]; then
-		echo 'arm'
    		docker-compose -f docker-compose.yml -f docker-compose.arm32v7.yml up -d $container
 	elif [[ $(uname -m) =~ "aarch" ]]; then
-		echo 'aarch'
    		docker-compose -f docker-compose.yml -f docker-compose.arm32v7.yml up -d $container
 	else
 		docker-compose up -d $container
