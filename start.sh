@@ -132,8 +132,10 @@ function build_data_structure {
 
 function check_dependencies {
 	if ! [ -x "$(command -v docker-compose)" ]; then
-		echo 'Error: docker-compose is not installed.' >&2
-		exit 1
+		if ! [ -n "$(docker compose version 2>/dev/null)" ]; then
+			echo 'Error: neither docker-compose nor docker compose is installed.' >&2
+			exit 1
+		fi
 	fi
 
 	if ! [ -x "$(command -v git)" ]; then
@@ -156,17 +158,17 @@ function start {
 
 	echo 'Starting the containers'
 	if [[ $(uname -m) =~ "arm" ]]; then
-   		docker-compose -f docker-compose.yml -f docker-compose.arm32v7.yml up -d $container
+   		docker compose -f docker-compose.yml -f docker-compose.arm32v7.yml up -d $container
 	elif [[ $(uname -m) =~ "aarch" ]]; then
-   		docker-compose -f docker-compose.yml -f docker-compose.arm32v7.yml up -d $container
+   		docker compose -f docker-compose.yml -f docker-compose.arm32v7.yml up -d $container
 	else
-		docker-compose up -d $container
+		docker compose up -d $container
 	fi
 }
 
 function stop {
 	echo 'Stopping all containers'
-	docker-compose stop
+	docker compose stop
 }
 
 function build {
@@ -184,7 +186,7 @@ function update {
 Automatic update only works with a cloned Git repository.
 Back up your settings and shut down all containers with
 
-docker-compose down --remove orphans
+docker compose down --remove orphans
 
 Then copy the current version from GitHub to this folder and run
 
@@ -194,7 +196,7 @@ Alternatively create a Git clone of the repository."
 exit 1
 	fi
 	echo 'Shutting down all running containers and removing them.'
-	docker-compose down --remove-orphans
+	docker compose down --remove-orphans
 	if [ ! $? -eq 0 ]; then
 		echo 'Updating failed. Please check the repository on GitHub.'
 	fi
@@ -206,7 +208,7 @@ exit 1
 		echo 'Updating failed. Please check the repository on GitHub.'
 	fi
 	echo 'Pulling docker images.'
-	docker-compose pull
+	docker compose pull
 	if [ ! $? -eq 0 ]; then
 		echo 'Updating failed. Please check the repository on GitHub.'
 	fi
