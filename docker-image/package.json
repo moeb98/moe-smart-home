@@ -50,7 +50,7 @@
         }
     ],
     "dependencies": {
-        "node-red": "*",
+        "node-red": ">=0.20.8",
         "node-red-contrib-fritz": "*",
         "node-red-contrib-homekit-bridged": "*",
         "node-red-contrib-noble-bluetooth": "*",
@@ -59,7 +59,7 @@
         "node-red-contrib-tado-client": "*",
         "node-red-contrib-zigbee2mqtt": "*",
 	"node-red-node-suncalc": "*",
-        "node-red-dashboard": "*"
+        "node-red-dashboard": ">=3.2.0"
     }
 }
 
