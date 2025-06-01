@@ -1,5 +1,3 @@
-version: '3.3'
-
 services:
   nodered:
     volumes:
@@ -9,4 +7,4 @@ services:
       - /dev/vcio:/dev/vcio
     environment:
       - TZ=Europe/Berlin
-      - LD_LIBRARY_PATH=/opt/vc/lib    
+      - LD_LIBRARY_PATH=/opt/vc/lib
