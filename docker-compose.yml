@@ -3,8 +3,8 @@ services:
   appdaemon:
     container_name: appdaemon
     restart: always
-#    image: acockburn/appdaemon:latest
-    image: acockburn/appdaemon:4.4.2
+    image: acockburn/appdaemon:latest
+#    image: acockburn/appdaemon:4.4.2
     environment:
       HA_URL: http://${SERVER_IP}:8123
       TOKEN: ${HA_TOKEN}
@@ -21,8 +21,8 @@ services:
 
   homeassistant:
     container_name: homeassistant
-#    image: "ghcr.io/home-assistant/home-assistant:stable"
-    image: "ghcr.io/home-assistant/home-assistant:2024.3"
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+#    image: "ghcr.io/home-assistant/home-assistant:2024.3"
     restart: always
     environment:
       - TZ=Europe/Berlin
