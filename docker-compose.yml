@@ -3,12 +3,13 @@ services:
   appdaemon:
     container_name: appdaemon
     restart: always
-    image: acockburn/appdaemon:latest
-#    image: acockburn/appdaemon:4.4.2
+#    image: acockburn/appdaemon:latest
+    image: acockburn/appdaemon:4.5.12
     environment:
       HA_URL: http://${SERVER_IP}:8123
       TOKEN: ${HA_TOKEN}
-      DASH_URL: http://${SERVER_IP}:5050
+#      DASH_URL: http://${SERVER_IP}:5050
+      DASH_URL: http://0.0.0.0:5050
     ports:
       - "5050:5050"
     volumes:
@@ -21,8 +22,8 @@ services:
 
   homeassistant:
     container_name: homeassistant
-    image: "ghcr.io/home-assistant/home-assistant:stable"
-#    image: "ghcr.io/home-assistant/home-assistant:2024.3"
+    image: "ghcr.io/home-assistant/home-assistant:2026.10"
+#    image: "ghcr.io/home-assistant/home-assistant:stable"
     restart: always
     environment:
       - TZ=Europe/Berlin
@@ -47,7 +48,7 @@ services:
     network_mode: "host"
     environment:
       - TZ=Europe/Berlin
-    
+
   mqtt:
     image: "eclipse-mosquitto"
     ports:
@@ -59,7 +60,7 @@ services:
     restart: always
     environment:
       - TZ=Europe/Berlin
-    
+
   zigbee:
     image: koenkk/zigbee2mqtt
     volumes:
