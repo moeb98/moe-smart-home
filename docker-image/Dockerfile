@@ -55,7 +55,7 @@ RUN apk add --no-cache --virtual buildtools build-base linux-headers udev eudev-
 
 
 #### Stage RELEASE #####################################################################################################
-FROM base AS RELEASE
+FROM base AS release
 USER root 
 ARG BUILD_DATE
 ARG BUILD_VERSION
