@@ -52,7 +52,7 @@ jobs:
       - name: Run Buildx
         run: |
           docker buildx build \
-            --platform linux/amd64 linux/arm64 \
+            --platform linux/amd64, linux/arm64 \
             -o type=registry \
             -t mrmoe/moe-smart-home:$(git describe --tags `git rev-list --tags --max-count=1`)-amd64 \
             -t mrmoe/moe-smart-home:latest \
